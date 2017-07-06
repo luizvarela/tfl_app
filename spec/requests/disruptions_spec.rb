@@ -3,18 +3,19 @@ require 'rails_helper'
 RSpec.describe 'Disruptions', type: :request do
   let(:body) do
     {
-      "Root" => {
-        "Disruptions" => {
-          "Disruption" => [
+      'Root' => {
+        'Disruptions' => {
+          'Disruption' => [
             {
-              "CauseArea" => {
-                "DisplayPoint" => {
-                  "Point" => {
-                    "coordinatesEN" => '-.08721,51.510316'
+              'CauseArea' => {
+                'DisplayPoint' => {
+                  'Point' => {
+                    'coordinatesLL' => '-.08721,51.510316'
                   }
                 }
               },
-              "comments" => "foo bar"
+              'comments' => 'foo bar',
+              'location' => 'baz bar'
             }
           ]
         }
@@ -27,7 +28,8 @@ RSpec.describe 'Disruptions', type: :request do
       {
         'lat' => '51.510316',
         'long' => '-.08721',
-        'comments' => 'foo bar'
+        'comments' => 'foo bar',
+        'location' => 'baz bar'
       }
     ]
   end

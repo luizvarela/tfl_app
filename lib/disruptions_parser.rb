@@ -6,12 +6,13 @@ class DisruptionsParser
   def process
     Rails.cache.fetch('disruptions_parser', expires_in: 5.minutes) do
       disruptions.map do |disruption|
-        geolocation_node = disruption["CauseArea"]["DisplayPoint"]["Point"]["coordinatesLL"]
+        geolocation_node = disruption['CauseArea']['DisplayPoint']['Point']['coordinatesLL']
 
         {
           lat: latitude(geolocation_node),
           long: longitude(geolocation_node),
-          comments: disruption["comments"]
+          location: disruption['location'],
+          comments: disruption['comments']
         }
       end
     end
@@ -20,17 +21,17 @@ class DisruptionsParser
   private
 
   def longitude(node)
-    node.split(",").first
+    node.split(',').first
   end
 
   def latitude(node)
-    node.split(",").last
+    node.split(',').last
   end
 
   def disruptions
     return [] if body.empty?
 
-    body["Root"]["Disruptions"]["Disruption"]
+    body['Root']['Disruptions']['Disruption']
   end
 
   def body
