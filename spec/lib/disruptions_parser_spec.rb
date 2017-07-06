@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe DisruptionsParser do
+  before { Rails.cache.clear }
+  
   describe '.process' do
     let(:parser) { described_class.new }
 
@@ -62,6 +64,15 @@ RSpec.describe DisruptionsParser do
       allow(Request).to receive(:get).and_return(double('response', body: {}))
 
       expect(described_class.process).to eq []
+    end
+
+    it "uses the Rails.cache" do
+      cache = double(:cache)
+      allow(Request).to receive(:get).and_return(response)
+      expect(Rails).to receive(:cache).and_return(cache)
+      expect(cache).to receive(:fetch).with('disruptions_parser', expires_in: 5.minutes).and_yield
+
+      described_class.process
     end
   end
 end
