@@ -38,6 +38,10 @@ gem 'multi_xml'
 gem 'faraday_middleware'
 gem 'nokogiri'
 gem 'redis-rails'
+gem 'redis-store'
+gem 'sidekiq'
+gem 'sinatra', require: nil
+gem 'clockwork'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
