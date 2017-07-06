@@ -30,6 +30,7 @@ module TflApp
 
     config.active_job.queue_adapter = :sidekiq
 
-    config.autoload_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('lib', 'traffic_disruptions')
   end
 end
