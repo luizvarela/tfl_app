@@ -11,7 +11,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    fetch('http://localhost:3000/disruptions')
+    fetch('/disruptions')
       .then((response) => { return response.json() })
       .then((object) => { this.setState({ data: object }) });
   }
