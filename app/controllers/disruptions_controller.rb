@@ -1,6 +1,7 @@
 class DisruptionsController < ApplicationController
   def index
-    data = DisruptionsParser.process
+    data = TrafficDisruptions::Fetcher.call
+    
     render json: data, status: :ok
   end
 end
