@@ -6,7 +6,7 @@ class DisruptionsParser
   def process
     Rails.cache.fetch('disruptions_parser', expires_in: 5.minutes) do
       disruptions.map do |disruption|
-        geolocation_node = disruption["CauseArea"]["DisplayPoint"]["Point"]["coordinatesEN"]
+        geolocation_node = disruption["CauseArea"]["DisplayPoint"]["Point"]["coordinatesLL"]
 
         {
           lat: latitude(geolocation_node),
