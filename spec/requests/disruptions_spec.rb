@@ -1,29 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Disruptions', type: :request do
-  let(:body) do
-    {
-      'Root' => {
-        'Disruptions' => {
-          'Disruption' => [
-            {
-              'CauseArea' => {
-                'DisplayPoint' => {
-                  'Point' => {
-                    'coordinatesLL' => '-.08721,51.510316'
-                  }
-                }
-              },
-              'comments' => 'foo bar',
-              'location' => 'baz bar'
-            }
-          ]
-        }
-      }
-    }
-  end
-  let(:feed_response) { double('response', body: body) }
-  let(:expected_result) do
+  let(:traffic_disruptions_data) do
     [
       {
         'lat' => '51.510316',
@@ -35,22 +13,40 @@ RSpec.describe 'Disruptions', type: :request do
   end
 
   describe '/disruptions' do
-    it 'returns all disruptions parsed from the TFL feed' do
-      allow(Request).to receive(:get).and_return(feed_response)
+    describe 'when there is data available' do
+      before { allow(Cache).to receive(:get).and_return(traffic_disruptions_data) }
 
-      get '/disruptions'
+      it 'calls the Fetcher class' do
+        expect(TrafficDisruptions::Fetcher).to receive(:call).and_return(traffic_disruptions_data)
 
-      expect(response.status).to eq(200)
-      expect(JSON.parse(response.body)).to eq expected_result
+        get '/disruptions'
+      end
+
+      it 'returns all disruptions' do
+        get '/disruptions'
+
+        expect(JSON.parse(response.body)).to eq traffic_disruptions_data
+      end
+
+      it 'returns a status 200' do
+        get '/disruptions'
+        
+        expect(response.status).to eq(200)
+      end
     end
 
-    it 'returns an empty JSON when there is no data' do
-      allow(Request).to receive(:get).and_return(double('response', body: []))
+    describe 'when there is no data' do
+      it 'returns an empty JSON' do
+        get '/disruptions'
 
-      get '/disruptions'
+        expect(JSON.parse(response.body)).to eq []
+      end
 
-      expect(response.status).to eq(200)
-      expect(JSON.parse(response.body)).to eq []
+      it 'returns a status 200' do
+        get '/disruptions'
+
+        expect(response.status).to eq(200)
+      end
     end
   end
 end
