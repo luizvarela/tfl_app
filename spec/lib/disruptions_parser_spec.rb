@@ -48,7 +48,7 @@ RSpec.describe DisruptionsParser do
           lat: '51.510316',
           long: '-.08721',
           comments: 'foo bar'
-        }.to_json
+        }
       ]
     end
 
