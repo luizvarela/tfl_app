@@ -5,7 +5,9 @@ class TrafficDisruptions::Parser
 
   def process
     disruptions.map do |disruption|
-      geolocation_node = disruption['CauseArea']['DisplayPoint']['Point']['coordinatesLL']
+      geolocation_node = disruption.dig('CauseArea', 'DisplayPoint', 'Point', 'coordinatesLL')
+
+      next unless geolocation_node
 
       {
         lat: latitude(geolocation_node),
@@ -13,7 +15,7 @@ class TrafficDisruptions::Parser
         location: disruption['location'],
         comments: disruption['comments']
       }
-    end
+    end.compact
   end
 
   private
@@ -29,7 +31,7 @@ class TrafficDisruptions::Parser
   def disruptions
     return [] if body.empty?
 
-    body['Root']['Disruptions']['Disruption']
+    body.dig('Root', 'Disruptions', 'Disruption') || []
   end
 
   def body

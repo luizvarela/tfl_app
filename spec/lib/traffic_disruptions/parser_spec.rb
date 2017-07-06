@@ -65,10 +65,95 @@ RSpec.describe TrafficDisruptions::Parser do
 
     describe 'when there is not data' do
       let(:body) { {} }
-      it 'returns an empty array when request is empty' do
+
+      it 'returns an empty array' do
         allow(Request).to receive(:get).and_return(response)
 
         expect(described_class.process).to eq []
+      end
+    end
+
+    describe 'when Disruption node is empty' do
+      let(:body) do
+        {
+          'Root' => {
+            'Disruptions' => {
+              'Disruption' => []
+            }
+          }
+        }
+      end
+
+      it 'returns an empty array' do
+        allow(Request).to receive(:get).and_return(response)
+
+        expect(described_class.process).to eq []
+      end
+    end
+
+    describe 'when Disruptions node is empty' do
+      let(:body) do
+        {
+          'Root' => {
+            'Disruptions' => {
+            }
+          }
+        }
+      end
+
+      it 'returns an empty array' do
+        allow(Request).to receive(:get).and_return(response)
+
+        expect(described_class.process).to eq []
+      end
+    end
+
+    describe 'when Root node is empty' do
+      let(:body) do
+        {
+          'Root' => {}
+        }
+      end
+
+      it 'returns an empty array' do
+        allow(Request).to receive(:get).and_return(response)
+
+        expect(described_class.process).to eq []
+      end
+    end
+
+    describe 'when CauseArea node is empty' do
+      let(:body) do
+        {
+          'Root' => {
+            'Disruptions' => {
+              'Disruption' => [
+                {
+                  'CauseArea' => {
+                    'DisplayPoint' => {
+                      'Point' => {
+                        'coordinatesLL' => '-.08721,51.510316'
+                      }
+                    }
+                  },
+                  'comments' => 'foo bar',
+                  'location' => 'baz bar'
+                },
+                {
+                  'CauseArea' => {},
+                  'comments' => 'comment test',
+                  'location' => 'location test'
+                }
+              ]
+            }
+          }
+        }
+      end
+
+      it 'not allow nil results in array' do
+        allow(Request).to receive(:get).and_return(response)
+
+        expect(described_class.process).to eq expected_result
       end
     end
   end
