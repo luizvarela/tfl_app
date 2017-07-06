@@ -6,7 +6,8 @@ RSpec.describe TrafficDisruptions::Fetcher do
       double = double('traffic_disruptions_data')
       allow(Cache).to receive(:get).and_return(double)
 
-      expect(Cache).to receive(:get).with('traffic_disruptions_data')
+      expect(Cache).to receive(:get)
+        .with(TrafficDisruptions::Fetcher::CACHE_KEY)
 
       described_class.call
     end
@@ -15,6 +16,15 @@ RSpec.describe TrafficDisruptions::Fetcher do
       allow(Cache).to receive(:get).and_return(nil)
 
       expect(described_class.call).to eq []
+    end
+  end
+
+  describe 'execptions' do
+    it 'raises an error when Cache adapter is nil' do
+      allow(Cache).to receive(:adapter).and_return(nil)
+
+      expect{described_class.call}.to \
+        raise_error(TrafficDisruptions::Fetcher::MissingCacheAdapter)
     end
   end
 end

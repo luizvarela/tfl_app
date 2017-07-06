@@ -1,5 +1,11 @@
 class TrafficDisruptions::Fetcher
+  class MissingCacheAdapter < StandardError; end
+
+  CACHE_KEY = 'traffic_disruptions_data'.freeze
+
   def self.call
-    Cache.get('traffic_disruptions_data') || []
+    raise MissingCacheAdapter if Cache.adapter.nil?
+    
+    Cache.get(CACHE_KEY) || []
   end
 end
