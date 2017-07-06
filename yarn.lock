@@ -1589,6 +1589,10 @@ domain-browser@^1.1.1:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.1.7.tgz#867aa4b093faa05f1de08c06f4d7b21fdf8698bc"
 
+domkit@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/domkit/-/domkit-0.0.1.tgz#88399d586794efc1154fec6c22cfe50f19bd4dbb"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
@@ -1753,7 +1757,7 @@ event-emitter@~0.3.5:
     d "1"
     es5-ext "~0.10.14"
 
-eventemitter3@1.x.x:
+eventemitter3@1.x.x, eventemitter3@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-1.2.0.tgz#1c86991d816ad1e504750e73874224ecf3bec508"
 
@@ -1861,7 +1865,7 @@ faye-websocket@~0.11.0:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fbjs@^0.8.9:
+fbjs@^0.8.3, fbjs@^0.8.9:
   version "0.8.12"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.12.tgz#10b5d92f76d45575fd63a217d4ea02bea2f8ed04"
   dependencies:
@@ -2101,9 +2105,24 @@ gonzales-pe@^4.0.3:
   dependencies:
     minimist "1.1.x"
 
+google-map-react@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/google-map-react/-/google-map-react-0.24.0.tgz#7276546d303c5ae837963f8bc1386b75f1aa2c60"
+  dependencies:
+    eventemitter3 "^1.1.0"
+    fbjs "^0.8.3"
+    point-geometry "0.0.0"
+    scriptjs "^2.5.7"
+
 graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.1.9:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
+
+halogen@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/halogen/-/halogen-0.2.0.tgz#1c65a99a9352e6bf02f41beb7081852fce7e7473"
+  dependencies:
+    domkit "0.0.1"
 
 handle-thing@^1.2.5:
   version "1.2.5"
@@ -3319,6 +3338,10 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+point-geometry@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/point-geometry/-/point-geometry-0.0.0.tgz#6fcbcad7a803b6418247dd6e49c2853c584daff7"
+
 portfinder@^1.0.9:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"
@@ -4205,6 +4228,10 @@ schema-utils@^0.3.0:
   resolved "https://registry.yarnpkg.com/schema-utils/-/schema-utils-0.3.0.tgz#f5877222ce3e931edae039f17eb3716e7137f8cf"
   dependencies:
     ajv "^5.0.0"
+
+scriptjs@^2.5.7:
+  version "2.5.8"
+  resolved "https://registry.yarnpkg.com/scriptjs/-/scriptjs-2.5.8.tgz#d0c43955c2e6bad33b6e4edf7b53b8965aa7ca5f"
 
 scss-tokenizer@^0.2.3:
   version "0.2.3"
