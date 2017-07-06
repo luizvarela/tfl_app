@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe DisruptionsParser do
-  before { Rails.cache.clear }
-  
   describe '.process' do
     let(:parser) { described_class.new }
 

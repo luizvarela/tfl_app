@@ -8,7 +8,7 @@ class Request
 
     def conn
       Faraday.new TFL_URL do |conn|
-        conn.use FaradayMiddleware::ParseXml,  :content_type => /\bxml$/
+        conn.use FaradayMiddleware::ParseXml, :content_type => /\bxml$/
         conn.adapter Faraday.default_adapter
       end
     end
