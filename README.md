@@ -32,6 +32,7 @@ In the backend most of the logic is in the `lib` directory. Basically, a clockwo
 
 You can check a detailed diagram bellow:
 
+![Imgur](http://i.imgur.com/CBQAHoA.png)
 
 The scheduler process will run every 5 minutes, it's the same time used by the feed, the cache is always updated when a new data is found.
 
